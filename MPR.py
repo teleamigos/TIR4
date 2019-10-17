@@ -16,9 +16,19 @@ with open('Nodes.csv', newline='') as File:
         tp[Node]=Neighbors
         Neighbors=[]
     File.close()
+"""-----------------------------------------------------------------------------
+1- ESCOGER EL VECINO CON MAYOR NO. DE VECINOS
+2- SI LOS VECINOS TIENEN EL MISMO NO. DE VECINOS, SE ESCOGE AL MENOS ESCOGIDO
+3.-SI HAN SIDO ESCOGIDOS EL MISMO NO. DE VECES, ESCOGE AL SEGUNDO MAYOR
+-----------------------------------------------------------------------------"""
 aux=0
 Nodes_ord=[]
 for Node in tp:
-    L=len(tp[Node])
-    if L>=aux:
-        
+    for Neighbor in tp[Node]:
+            L=len(tp[Neighbor])
+            if L>=aux:
+                MPR=(Node,Neighbor)
+                aux=L
+    print("Nodo : {} MPR : {} ".format(MPR[0],MPR[1]))
+    MPR=('','')
+    aux=0
