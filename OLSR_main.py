@@ -10,4 +10,5 @@ from socket import socket, AF_PACKET, SOCK_RAW, htons
 import time
 from threading import Thread
 
-s=socket(AF_PACKET,SOCK_RAW,htons(0x0801))
+#s=socket(AF_PACKET,SOCK_RAW,htons(0x0801))
+OLSRs=OLSR()
