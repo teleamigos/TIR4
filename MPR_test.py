@@ -6,7 +6,7 @@ from MPR import*
 Neighbors=[]
 tp=dict()
 """---------------------------Lee archivo------------------------------------"""
-with open('Nodes.csv', newline='') as File:
+with open('G25.csv', newline='') as File:
     reader = csv.reader(File)
     for row in reader:
         Node=row[0]
