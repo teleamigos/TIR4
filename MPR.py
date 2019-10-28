@@ -19,24 +19,22 @@ class MPR:
             if Node !='0':
                 L=len(self.tp[Node])
                 lista.append((Node,L))
-        total=0
-        for l in lista:
-            total +=l[1]
-        i=0
         for nodo in lista:
-            aux=self.tp[nodo[0]]
+            #print(nodo)
             c=0
-            for n in aux:
-                for node in self.tp:
-                    if n!=node:
-                        if n in self.tp[node]:
+            if nodo[1]>1:
+                if len(vecinos)==0:
+                    vecinos.append(self.tp[nodo[0]])
+                    self.MPR.append(nodo[0])
+                else:
+                    for v in self.tp[nodo[0]]:
+                        if v in vecinos[0]:
+                            pass
+                        else :
+                            vecinos[0].append(v)
                             c+=1
-            if c>(total/(len(lista)/5)):
-                print("Este nodo es MPR",nodo)
-                i+=1
-        print("tamano",i)
-        """self.MPR_tabla.append(MPR_nodo)
-        print('Node : {} \t-------> MPR : {}'.format(self.MPR_tabla[i][0],self.MPR_tabla[i][1]))
-        MPR=('','')
-        aux=0
-        i+=1"""
+                    if c>1:
+                        self.MPR.append(nodo[0])
+        """print(vecinos)"""
+        print(self.MPR)
+        print(len(self.MPR))
