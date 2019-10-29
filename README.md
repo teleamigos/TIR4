@@ -13,3 +13,7 @@
 #4.- Class Message_Hello to pack Hello message
 #Version 2.1
 #1.- MPR optimo
+#Version 2.1.1
+#1.- Inicializacion del mensaje Hello
+#2.- Empaquetado del mensaje Hello
+#3.- Manda a llamar empaquetado desde OLSR

@@ -24,7 +24,7 @@ from Message_TC import*
 class OLSR(Message_Hello,Message_TC):
     def __init__(self):
         self.Len_pq={
-        'Hello':128,
+        'Hello':8,
         'TC':4
         }
         self.NSP=0
@@ -39,8 +39,14 @@ class OLSR(Message_Hello,Message_TC):
         self.HopC=0
         self.MSN=0
         self.msj=b""
-    def Empaquetado(self):
+        self.MHello=Message_Hello()
+    def Empaquetado(self,Message_type):
         # Dependiendo el tipo de mensaje se manda a llamar a la funcion
         #Empacadora de mensaje Hello o Tc y regresa el mensaje empaquetado para
         # ser sumado al paquete ya hecho
-        pass
+        if Message_type=='Hello':
+            Hello=self.MHello.Genera('WILL_LOW')
+        elif Message_type=='TC':
+            pass
+        else:
+            print("Error")

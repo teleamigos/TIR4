@@ -6,9 +6,11 @@
 4.-  Enviar mensaje Hello.
 -----------------------------------------------------------------------------"""
 from Message_Hello import *
+from OLSR import *
 from socket import socket, AF_PACKET, SOCK_RAW, htons
 import time
 from threading import Thread
 
 #s=socket(AF_PACKET,SOCK_RAW,htons(0x0801))
 OLSRs=OLSR()
+OLSRs.Empaquetado('Hello')
