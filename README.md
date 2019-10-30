@@ -17,3 +17,5 @@
 #1.- Inicializacion del mensaje Hello
 #2.- Empaquetado del mensaje Hello
 #3.- Manda a llamar empaquetado desde OLSR
+#Version 2.1.2
+#1.- Empaquetados completos

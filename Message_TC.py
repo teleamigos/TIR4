@@ -14,6 +14,13 @@
 
 class Message_TC:
     def __inti(self):
-        self.ANSN=b""
-        self.reserved=b""
+        self.ANSN=0
+        self.reserved=b"0000000000000000"
         self.ANMA=b""
+
+    def Genera(self,vecinos):
+        TC=pack('!H',self.ANSN)+self.reserved
+        for v in vecinos:
+            V=v.encode(encoding='utf-8')
+            TC+=V
+        return TC

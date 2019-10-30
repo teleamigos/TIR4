@@ -23,30 +23,35 @@ from Message_TC import*
 
 class OLSR(Message_Hello,Message_TC):
     def __init__(self):
-        self.Len_pq={
-        'Hello':8,
-        'TC':4
-        }
-        self.NSP=0
+        self.Len_pq=0
+        self.PSN=0
         self.TypeM={
-        'Hello':b"",
-        'TC':b""
+        'Hello':127,
+        'TC':0
         }
-        self.Vtime=0
+        self.Vtime=2
         self.Len_msj=0
-        self.OAdd=b""
+        self.OAdd='127.0.0.1'
         self.TtoL=0
         self.HopC=0
         self.MSN=0
-        self.msj=b""
         self.MHello=Message_Hello()
-    def Empaquetado(self,Message_type):
+        self.MTC=Message_TC()
+    def Empaquetado(self,Message_type,direcciones):
         # Dependiendo el tipo de mensaje se manda a llamar a la funcion
         #Empacadora de mensaje Hello o Tc y regresa el mensaje empaquetado para
         # ser sumado al paquete ya hecho
         if Message_type=='Hello':
-            Hello=self.MHello.Genera('WILL_LOW')
+            msj=self.MHello.Genera('WILL_LOW',direcciones)
+            self.TtoL=1
         elif Message_type=='TC':
-            pass
+            msj=self.MTC.Genera(direcciones)
+            self.TtoL=4
         else:
             print("Error")
+        self.Len_pq=len(msj)
+        paquete=pack('!HHBB',self.Len_pq,self.PSN,self.TypeM[Message_type],self.Vtime)
+        self.Len_msj=8+len(msj)
+        paquete+=pack('!H',self.Len_msj)+self.OAdd.encode('utf-8')
+        paquete+=pack('!BBH',self.TtoL,self.HopC,self.MSN)+msj
+        print(paquete)

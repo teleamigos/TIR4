@@ -34,10 +34,13 @@ class Message_Hello:
         self.LMS=1
         self.NIAdd=b'\xff\xff\xff\xff\xff\xff'
 
-    def Genera(self,Willingness):
+    def Genera(self,Willingness,vecinos):
         w=self.Willingness[Willingness]
         Hello=self.reserved1
-        W=pack('!QQ',self.Ht,w)
-        lms=pack('!Q',self.LMS)
+        W=pack('!BB',self.Ht,w)
+        lms=pack('!H',self.LMS)
         Hello +=W+self.LC+self.reserved2+lms+self.NIAdd
+        for v in vecinos:
+            V=v.encode(encoding='utf-8')
+            Hello+=V
         return Hello
