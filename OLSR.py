@@ -37,12 +37,12 @@ class OLSR(Message_Hello,Message_TC):
         self.MSN=0
         self.MHello=Message_Hello()
         self.MTC=Message_TC()
-    def Empaquetado(self,Message_type,direcciones):
+    def Empaquetado(self,Message_type,direcciones,Willingness):
         # Dependiendo el tipo de mensaje se manda a llamar a la funcion
         #Empacadora de mensaje Hello o Tc y regresa el mensaje empaquetado para
         # ser sumado al paquete ya hecho
         if Message_type=='Hello':
-            msj=self.MHello.Genera('WILL_LOW',direcciones)
+            msj=self.MHello.Genera(Willingness,direcciones)
             self.TtoL=1
         elif Message_type=='TC':
             msj=self.MTC.Genera(direcciones)
@@ -54,4 +54,17 @@ class OLSR(Message_Hello,Message_TC):
         self.Len_msj=8+len(msj)
         paquete+=pack('!H',self.Len_msj)+self.OAdd.encode('utf-8')
         paquete+=pack('!BBH',self.TtoL,self.HopC,self.MSN)+msj
-        print(paquete)
+        return paquete
+
+    def Desempaquetado(self,msj):
+        len_msj=unpack('!H',msj[:2])[0]
+        len_pq=len(msj)
+        msj_rcv=msj[len_pq-len_msj:]
+        Neighbor_add=msj[8:len_pq-len_msj-4]
+        Neighbor_add=Neighbor_add.decode('utf-8')
+        type=unpack('!B',msj[4:5])[0]
+        if type==self.TypeM['Hello']:
+            neighbors_adds=self.MHello.Desempaqueta_Hello(msj_rcv)
+        elif type==self.TypeM['TC']:
+            pass
+        return Neighbor_add,neighbors_adds
