@@ -34,8 +34,9 @@ class Message_Hello:
         self.LMS=1
         self.NIAdd=['']
 
-    def Genera(self,Willingness,vecinos):
+    def Genera(self,Willingness,vecinos,lc):
         w=self.Willingness[Willingness]
+        self.LC=lc
         Hello=self.reserved1
         W=pack('!BB',self.Ht,w)
         lms=pack('!H',self.LMS)

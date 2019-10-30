@@ -40,28 +40,31 @@ from Threads_send import*
 
 sock=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 IP='192.168.100.14'
+BD='255.255.255.255'
 PORT=5005
-olsr=OLSR()
-Yo=MyNode()
-"""
-
-Hello=olsr.Empaquetado('Hello',[''],'WILL_DEFAULT')#Primer Mensaje es Hello por default.
-#Enviar por un sokcet
-print(type(Hello))
-sock.sendto(Hello,(IP,PORT))"""
-#sock.bind((IP,PORT))
+olsr=OLSR(IP)
+Yo=MyNode(IP)
+sock.bind((IP,PORT))
 c=0
 i=0
-while i<20:
+lista_aux=[]
+while i<60:
     if c==0:
-        Thread1=Thread(target=Send_Hello,args=(olsr,['127.0.1.1','132.248.120.131'],'WILL_DEFAULT'))
+        Thread1=Thread(target=Send_Hello,args=(sock,(BD,PORT),olsr,[''],6,'WILL_DEFAULT'))
         Thread1.start()
         Thread1.join()
         c+=1
+    else:
+        Thread1=Thread(target=Send_Hello,args=(sock,(IP,PORT),olsr,Yo.Neighbor,7,'WILL_ALWAYS'))
+        Thread1.start()
+        Thread1.join()
     """
     msj,addr=sock.recvfrom(1024)
     Nodo,Neighbors=olsr.Desempaquetado(msj)
-    Yo.AgregaVecino(Nodo)
+    if i<20:
+        Yo.AgregaVecino(Nodo)
+    else:
+        lista_aux.append((Nodo,Neighbors))
     """
-    sleep.time(1)
+    time.sleep(1)
     i+=0

@@ -22,7 +22,7 @@ from Message_Hello import*
 from Message_TC import*
 
 class OLSR(Message_Hello,Message_TC):
-    def __init__(self):
+    def __init__(self,IP):
         self.Len_pq=0
         self.PSN=0
         self.TypeM={
@@ -31,18 +31,18 @@ class OLSR(Message_Hello,Message_TC):
         }
         self.Vtime=2
         self.Len_msj=0
-        self.OAdd='127.0.0.1'
+        self.OAdd=IP
         self.TtoL=0
         self.HopC=0
         self.MSN=0
         self.MHello=Message_Hello()
         self.MTC=Message_TC()
-    def Empaquetado(self,Message_type,direcciones,Willingness):
+    def Empaquetado(self,Message_type,direcciones,Willingness,LC):
         # Dependiendo el tipo de mensaje se manda a llamar a la funcion
         #Empacadora de mensaje Hello o Tc y regresa el mensaje empaquetado para
         # ser sumado al paquete ya hecho
         if Message_type=='Hello':
-            msj=self.MHello.Genera(Willingness,direcciones)
+            msj=self.MHello.Genera(Willingness,direcciones,LC)
             self.TtoL=1
         elif Message_type=='TC':
             msj=self.MTC.Genera(direcciones)

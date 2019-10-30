@@ -6,8 +6,8 @@
 -----------------------------------------------------------------------------"""
 
 class MyNode:
-    def __init__(self):
-        self.my_address='127.0.0.1'
+    def __init__(self,IP):
+        self.my_address=IP
         self.Neighbor=[]
         self.MPR=[]
         self.tp=dict()
