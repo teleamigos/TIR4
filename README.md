@@ -19,3 +19,11 @@
 #3.- Manda a llamar empaquetado desde OLSR
 #Version 2.1.2
 #1.- Empaquetados completos
+#Version 2.1.5
+#1.- Desmepaquetados completos
+#2.- Clase MyNode
+#Version 2.2
+#1.- Transmision de mensaje Hello de reconocimiento.
+#2.- Hilo de trnasmision programado.
+#3.- Recepcion de informacion de primeros mensajes de hello.
+#4.- Coleccion de vecinos.
