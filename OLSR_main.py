@@ -58,13 +58,11 @@ while i<60:
         Thread1=Thread(target=Send_Hello,args=(sock,(IP,PORT),olsr,Yo.Neighbor,7,'WILL_ALWAYS'))
         Thread1.start()
         Thread1.join()
-    """
     msj,addr=sock.recvfrom(1024)
     Nodo,Neighbors=olsr.Desempaquetado(msj)
     if i<20:
         Yo.AgregaVecino(Nodo)
     else:
         lista_aux.append((Nodo,Neighbors))
-    """
     time.sleep(1)
     i+=0
