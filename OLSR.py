@@ -66,5 +66,5 @@ class OLSR(Message_Hello,Message_TC):
         if type==self.TypeM['Hello']:
             neighbors_adds=self.MHello.Desempaqueta_Hello(msj_rcv)
         elif type==self.TypeM['TC']:
-            pass
+            neighbors_adds=self.MTC.Desempaqueta__TC(msj_rcv)
         return Neighbor_add,neighbors_adds

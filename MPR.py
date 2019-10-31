@@ -9,7 +9,7 @@ class MPR:
         self.MPR_tabla=[]
         self.MPR=[]
 
-    def Busca_MPRs(self):
+    def Busca_MPRs(self,my_address):
         aux=0
         i=0
         c=0
@@ -22,19 +22,18 @@ class MPR:
         for nodo in lista:
             #print(nodo)
             c=0
-            if nodo[1]>1:
-                if len(vecinos)==0:
-                    vecinos.append(self.tp[nodo[0]])
-                    self.MPR.append(nodo[0])
-                else:
-                    for v in self.tp[nodo[0]]:
-                        if v in vecinos[0]:
-                            pass
-                        else :
-                            vecinos[0].append(v)
-                            c+=1
-                    if c>1:
+            if nodo[0]!=my_address:
+                if nodo[1]>=1:
+                    if len(vecinos)==0:
+                        vecinos.append(self.tp[nodo[0]])
                         self.MPR.append(nodo[0])
-        """print(vecinos)"""
-        print(self.MPR)
-        print(len(self.MPR))
+                    else:
+                        for v in self.tp[nodo[0]]:
+                            if v in vecinos[0]:
+                                pass
+                            else :
+                                vecinos[0].append(v)
+                                c+=1
+                        if c>1:
+                            self.MPR.append(nodo[0])
+            """print(vecinos)"""

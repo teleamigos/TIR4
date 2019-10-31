@@ -4,14 +4,15 @@
 2.- Tiene informacion del nodo
 3.- Calcula MPR
 -----------------------------------------------------------------------------"""
-
-class MyNode:
+from MPR import*
+class MyNode(MPR):
     def __init__(self,IP):
         self.my_address=IP
         self.Neighbor=[]
-        self.MPR=[]
+        #self.MPR=False
         self.tp=dict()
         self.c=0
+        self.SoyMPR={}
     def CreaTopologia(self,Nodo):
         self.tp[Nodo[0]]=Nodo[1]
     def AgregaVecino(self,Vecino):
@@ -19,5 +20,9 @@ class MyNode:
             print("Ya conocido")
             self.c+=1
         else:
-            self.Neighbor.append(Vecino)
-        print(self.Neighbor)
+            if Vecino != self.my_address:
+                self.Neighbor.append(Vecino)
+    def Calcula_MPR(self):
+        MPRs=MPR(self.tp)
+        MPRs.Busca_MPRs(self.my_address)
+        return MPRs.MPR
